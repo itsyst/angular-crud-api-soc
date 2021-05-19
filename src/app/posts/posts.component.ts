@@ -1,5 +1,4 @@
 import { HttpClient} from '@angular/common/http';
-import { identifierModuleUrl } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -28,6 +27,15 @@ export class PostsComponent implements OnInit {
         // this.posts.unshift(post);
         this.posts.splice(0, 0, post);
       });
+  }
+
+  updatePost(post: any) {
+    // we send only the property that we wont to change not the all object
+    //this.http.put(this.url, JSON.stringify(post))
+    this.http.patch(this.url + '/' + post.id, JSON.stringify({ isRed: true }))
+      .subscribe(response => {
+        console.log(response)
+      })
   }
 
   ngOnInit(): void {
