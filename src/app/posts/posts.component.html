@@ -1,20 +1,10 @@
-<input
-  type="text"
-  #title
-  (keyup.enter)="createPost(title)"
-  class="mb-3 form-control">
-<ul class="list-group">
-  <li
-    *ngFor="let post of posts"
-    class="list-group-item row justify-content-between">
-    <button
-      (click)="updatePost(post)"
-      type="button"
-      class="btn btn-primary btn-sm">Update</button>
-    {{post.title}}
-    <button
-      type="button"
-      (click)="deletePost(post)"
-      class="btn btn-danger">X</button>
-  </li>
-</ul>
+<div class="container">
+  <input type="text" #title (keyup.enter)="createPost(title)" class="mb-3 form-control">
+  <ul class="list-group">
+    <li *ngFor="let post of posts" class="list-group-item">
+      <button (click)="updatePost(post)" type="button" class="btn btn-primary btn-sm">Update</button>
+      {{post.title}}
+      <button type="button" (click)="deletePost(post)" class="btn btn-danger">X</button>
+    </li>
+  </ul>
+</div>
