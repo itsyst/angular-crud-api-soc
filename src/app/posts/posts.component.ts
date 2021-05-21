@@ -10,11 +10,11 @@ export class PostsComponent implements OnInit {
   posts: Array<any> = [];
   private url = 'http://jsonplaceholder.typicode.com/posts/';
 
-  constructor (private http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
-  createPost(input: HTMLInputElement) {
-    let post: any = { title: input.value }
+  createPost(input: HTMLInputElement): void {
+    const post: any = { title: input.value };
     input.value = '';
 
     this.http.post(this.url, JSON.stringify(post))
@@ -25,21 +25,21 @@ export class PostsComponent implements OnInit {
       });
   }
 
-  updatePost(post: any) {
+  updatePost(post: any): void {
     // we send only the property that we wont to change not the all object
-    //this.http.put(this.url, JSON.stringify(post))
+    // this.http.put(this.url, JSON.stringify(post))
     this.http.patch(this.url + '/' + post.id, JSON.stringify({ isRed: true }))
       .subscribe(response => {
-        console.log(response)
-      })
+        console.log(response);
+      });
   }
 
-  deletePost(post: any) {
+  deletePost(post: any): void {
     this.http.delete(this.url + '/' + post.id)
       .subscribe(response => {
-        let index = this.posts.indexOf(post)
+        const index = this.posts.indexOf(post);
         this.posts.splice(index, 1);
-      })
+      });
   }
 
   ngOnInit(): void {
