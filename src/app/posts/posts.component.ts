@@ -22,7 +22,15 @@ export class PostsComponent implements OnInit {
         post.id = (response as any).id;
         // this.posts.unshift(post);
         this.posts.splice(0, 0, post);
-      });
+        }, (error: Response) => {
+          if (error.status === 400) {
+            // this.form.setErrors(error.json())
+          }
+          else{
+           alert('An unexpected error occurred.');
+            console.log(error);
+          }
+        });
   }
 
   updatePost(post: any): void {
@@ -32,7 +40,10 @@ export class PostsComponent implements OnInit {
         .updatePost(post)
         .subscribe(response => {
         console.log(response);
-      });
+      }, (error: any) => {
+          alert('An unexpected error occurred.');
+          console.log(error);
+        });
   }
 
   deletePost(post: any): void {
@@ -41,14 +52,25 @@ export class PostsComponent implements OnInit {
         .subscribe(response => {
         const index = this.posts.indexOf(post);
         this.posts.splice(index, 1);
-      });
+        }, (error: Response) => {
+          if (error.status === 404)
+            alert('This post has already been deleted.')
+          else
+            alert('An unexpected error occurred.');
+            console.log(error);
+        });
   }
 
   ngOnInit(): void {
     this.service
         .getPosts()
-        .subscribe((response) => {
+      .subscribe(
+          response => {
           this.posts = response as Array<any>;
+        },
+          error  => {
+          alert('An unexpected error occurred.');
+          console.log(error);
         });
   }
 }
