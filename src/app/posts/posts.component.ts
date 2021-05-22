@@ -21,8 +21,8 @@ export class PostsComponent implements OnInit {
     input.value = '';
 
     this.postService.create(post).subscribe({
-        next: response => {
-        post.id = (response as any).id;
+        next: newPost => {
+        post.id = newPost.id;
         // this.posts.unshift(post);
         this.posts.splice(0, 0, post);
         },
@@ -31,33 +31,18 @@ export class PostsComponent implements OnInit {
             // this.form.setErrors(error.originalError);
           }
           else throw error;
-        }});
+        }
+    });
   }
 
-  updatePost(post: any): void {
-    // we send only the property that we wont to change not the all object
-    // this.http.put(this.url, JSON.stringify(post))
+  updatePost(post: Post): void {
     this.postService.update(post).subscribe(
-      (response) => {
-        console.log(response);
+      (updatedPost) => {
+        console.log(updatedPost);
       });
   }
 
   deletePost(post: Post): void {
-    // this.service
-    //     .deletePost(post.id)
-    //     .subscribe(response => {
-    //     const index = this.posts.indexOf(post);
-    //     this.posts.splice(index, 1);
-    //     }, (error: Response) => {
-    //       if (error.status === 404)
-    //         alert('This post has already been deleted.')
-    //       else
-    //         alert('An unexpected error occurred.');
-    //         console.log(error);
-    //     });
-    // the above method is deprecated
-
     this.postService.delete(post).subscribe({
         next: () => {
           const index = this.posts.indexOf(post);
@@ -70,25 +55,13 @@ export class PostsComponent implements OnInit {
         }});
   }
 
-  getPosts() {
+  getPosts(): void {
     this.postService
     .getAll()
-    .subscribe(
-      (response: Post[]) => this.posts = response,
-    )
+    .subscribe( (posts: Post[] )=> this.posts = posts)
   }
 
   ngOnInit(): void {
-    // this.postService
-    //     .getPosts()
-    //   .subscribe(
-    //       response => {
-    //       this.posts = response as Array<any>;
-    //     },
-    //       error  => {
-    //       alert('An unexpected error occurred.');
-    //       console.log(error);
-    //     });
     this.getPosts();
   }
 }
