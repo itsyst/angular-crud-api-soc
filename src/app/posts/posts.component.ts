@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NotFoundError, Subscription } from 'rxjs';
-import { AppError } from '../common/app-error';
-import { BadInput } from '../common/bad-input';
-import { PostService } from '../services/post.service';
-import { Post } from '../types/Post';
+import { NotFoundError } from 'rxjs';
+import { AppError } from '@/app/common/app-error';
+import { BadInput } from '@/app/common/bad-input';
+import { PostService } from '@/app/services/post.service';
+import { Post } from '@/app/types/Post';
 
 @Component({
   selector: 'posts',
@@ -20,7 +20,7 @@ export class PostsComponent implements OnInit {
     const post: any = { title: input.value };
     input.value = '';
 
-    this.postService.createPost(post).subscribe({
+    this.postService.create(post).subscribe({
         next: response => {
         post.id = (response as any).id;
         // this.posts.unshift(post);
@@ -37,7 +37,7 @@ export class PostsComponent implements OnInit {
   updatePost(post: any): void {
     // we send only the property that we wont to change not the all object
     // this.http.put(this.url, JSON.stringify(post))
-    this.postService.updatePost(post).subscribe(
+    this.postService.update(post).subscribe(
       (response) => {
         console.log(response);
       });
@@ -58,7 +58,7 @@ export class PostsComponent implements OnInit {
     //     });
     // the above method is deprecated
 
-    this.postService.deletePost(post).subscribe({
+    this.postService.delete(post).subscribe({
         next: () => {
           const index = this.posts.indexOf(post);
           this.posts.splice(index, 1);
@@ -72,7 +72,7 @@ export class PostsComponent implements OnInit {
 
   getPosts() {
     this.postService
-    .getPosts()
+    .getAll()
     .subscribe(
       (response: Post[]) => this.posts = response,
     )
