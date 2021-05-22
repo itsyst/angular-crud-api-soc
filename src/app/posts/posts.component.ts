@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { NotFoundError, Subscription } from 'rxjs';
+import { AppError } from '../common/app-error';
+import { BadInput } from '../common/bad-input';
 import { PostService } from '../services/post.service';
+import { Post } from '../types/Post';
 
 @Component({
   selector: 'posts',
@@ -8,51 +11,39 @@ import { PostService } from '../services/post.service';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-  posts: Array<any> = [];
-  postSubscription: Subscription = new Subscription;
+  posts: Post[] = [];
 
-  constructor(private service: PostService) {
+  constructor(private postService: PostService) {
   }
 
   createPost(input: HTMLInputElement): void {
     const post: any = { title: input.value };
     input.value = '';
 
-    this.service
-        .createPost(post)
-      .subscribe({
+    this.postService.createPost(post).subscribe({
         next: response => {
         post.id = (response as any).id;
         // this.posts.unshift(post);
         this.posts.splice(0, 0, post);
         },
-        error: (error: Response) => {
-          if (error.status === 400) {
-            // this.form.setErrors(error.json())
+        error: (error: AppError) => {
+          if (error instanceof BadInput) {
+            // this.form.setErrors(error.originalError);
           }
-          else{
-            console.error('An unexpected error occurred.', error);
-            console.log(error);
-          }
+          else throw error;
         }});
   }
 
   updatePost(post: any): void {
     // we send only the property that we wont to change not the all object
     // this.http.put(this.url, JSON.stringify(post))
-    this.service
-        .updatePost(post)
-      .subscribe({
-         next: (response) => {
-          console.log(response);
-      },
-      error: (error: any) => {
-        console.error('An unexpected error occurred.', error);
-        console.log(error);
-      }});
+    this.postService.updatePost(post).subscribe(
+      (response) => {
+        console.log(response);
+      });
   }
 
-  deletePost(post: any): void {
+  deletePost(post: Post): void {
     // this.service
     //     .deletePost(post.id)
     //     .subscribe(response => {
@@ -67,34 +58,28 @@ export class PostsComponent implements OnInit {
     //     });
     // the above method is deprecated
 
-    this.service
-        .deletePost(post.id)
-      .subscribe({
-        next: (response) => {
+    this.postService.deletePost(post.id).subscribe({
+        next: () => {
           const index = this.posts.indexOf(post);
           this.posts.splice(index, 1);
         },
-        error:  (error: Response) => {
-          if (error.status === 404)
-          console.log('This post has already been deleted.');
-          else
-            console.error('An unexpected error occurred.', error),
-            console.log(error);
+        error: (error: AppError) => {
+          if (error instanceof NotFoundError)
+            console.log('This post has already been deleted.');
+          else throw error;
         }});
   }
 
   getPosts() {
-    this.postSubscription = this.service
+    this.postService
     .getPosts()
-    .subscribe({
-      next: (response) => this.posts = response as Array<any>,
-      error: (error:Response) => console.error('An unexpected error occurred.', error),
-      complete: () => console.info('complete')
-    })
+    .subscribe(
+      (response: Post[]) => this.posts = response,
+    )
   }
 
   ngOnInit(): void {
-    // this.service
+    // this.postService
     //     .getPosts()
     //   .subscribe(
     //       response => {
@@ -105,9 +90,5 @@ export class PostsComponent implements OnInit {
     //       console.log(error);
     //     });
     this.getPosts();
-  }
-
-  ngOnDestroy(): void {
-    this.postSubscription.unsubscribe();
   }
 }
