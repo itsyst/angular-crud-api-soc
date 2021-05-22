@@ -20,18 +20,18 @@ export class PostService {
       .pipe(catchError(() => this.handelError));
   }
 
-  createPost(post: any): Observable<Post> {
+  createPost(post: Post): Observable<Post> {
     return this.http.post<Post>(this.url, JSON.stringify(post))
-      .pipe(catchError(() => this.handelError));;
+      .pipe(catchError(() => this.handelError));
   }
 
-  updatePost(post: any): Observable<Object> {
+  updatePost(post: Post): Observable<Object> {
     return this.http.patch(this.url + '/' + post.id, JSON.stringify({ isRed: true }))
       .pipe(catchError(() => this.handelError));
   }
 
-  deletePost(id: number){
-    return this.http.delete(this.url + '/' + id)
+  deletePost(post: Post){
+    return this.http.delete(this.url + '/' + post.id)
       .pipe(catchError(() => this.handelError));
   }
 

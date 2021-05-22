@@ -58,7 +58,7 @@ export class PostsComponent implements OnInit {
     //     });
     // the above method is deprecated
 
-    this.postService.deletePost(post.id).subscribe({
+    this.postService.deletePost(post).subscribe({
         next: () => {
           const index = this.posts.indexOf(post);
           this.posts.splice(index, 1);
