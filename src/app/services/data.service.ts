@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { NotFoundError, Observable } from 'rxjs';
+import { NotFoundError, Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { AppError } from '@/app/common/app-error';
 import { BadInput } from '@/app/common/bad-input';
