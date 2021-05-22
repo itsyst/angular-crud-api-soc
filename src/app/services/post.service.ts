@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NotFoundError, Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -16,28 +16,32 @@ export class PostService {
   constructor (private http: HttpClient) { }
 
   getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.url);
+    return this.http.get<Post[]>(this.url)
+      .pipe(catchError(() => this.handelError));
   }
 
   createPost(post: any): Observable<Post> {
     return this.http.post<Post>(this.url, JSON.stringify(post))
-      .pipe(catchError((error: Response) => {
-        if (error.status === 404)
-          return throwError(() => new BadInput(error.json()));
-        return throwError(() => new AppError(error.json()));
-      }));
+      .pipe(catchError(() => this.handelError));;
   }
 
   updatePost(post: any): Observable<Object> {
     return this.http.patch(this.url + '/' + post.id, JSON.stringify({ isRed: true }))
+      .pipe(catchError(() => this.handelError));
   }
 
   deletePost(id: number){
     return this.http.delete(this.url + '/' + id)
-      .pipe(catchError((error: Response) => {
-        if (error.status === 404)
-          return throwError(() => new AppError(NotFoundError));
-        return throwError(() => new AppError(error));
-      }));
+      .pipe(catchError(() => this.handelError));
+  }
+
+  private handelError(error: HttpErrorResponse) {
+    if (error.status === 400)
+      return new BadInput(error);
+
+    if (error.status === 404)
+      return  new AppError(NotFoundError);
+
+    return  new AppError(error);
   }
 }
