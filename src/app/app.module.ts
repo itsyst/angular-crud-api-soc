@@ -36,7 +36,7 @@ import { NavbarComponent } from './navbar/navbar.component';
         component: HomeComponent
       },
       {
-        path: 'followers/:username',
+        path: 'followers/:id',
         component: GithubProfileComponent
       },
       {
