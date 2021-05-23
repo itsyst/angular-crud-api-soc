@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { combineLatest } from 'rxjs';
 import { GithubFollowersService } from '../services/github-followers.service';
 import { Follower } from '../types/Follower';
 
@@ -20,18 +21,22 @@ export class GithubFollowersComponent implements OnInit {
   }
 
   getRouteParams(): void {
-    this.route.queryParamMap
-      .subscribe(params =>
+    combineLatest([
+      this.route.paramMap,
+      this.route.queryParamMap
+    ]).subscribe(combined => {
       {
-        let page = params.get('page');
-        console.log(page)
+        let id = combined[0].get('id');
+        let page = combined[1].get('page');
+        console.log('id:', id, 'page:', page)
       }
-      );
+    });
   }
 
   ngOnInit(): void {
-    this.getRouteParams()
+    this.getRouteParams();
     this.getFollowers();
+
   }
 
 }
