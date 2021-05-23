@@ -1,11 +1,11 @@
-<div *ngFor="let follower of followers" class="media">
-  <div class="media-left">
-    <a href="#">
-      <img class="avatar media-object" src="{{ follower.avatar_url }}" alt="...">
-    </a>
-  </div>
-  <div class="media-body">
-    <h4 class="media-heading">{{ follower.login }}</h4>
-    <a href="follower.html_url">{{ follower.html_url }}</a>
+<div class="row row-cols-3 row-cols-md-4 g-4">
+  <div class="col" *ngFor="let follower of followers">
+    <div class="card">
+      <img src="{{ follower.avatar_url }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{ follower.login }}</h5>
+        <p class="card-text"><a href="follower.html_url">{{ follower.html_url }}</a></p>
+      </div>
+    </div>
   </div>
 </div>
