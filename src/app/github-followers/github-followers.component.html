@@ -3,7 +3,7 @@
     <div class="card">
       <img src="{{ follower.avatar_url }}" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title"><a [routerLink]="['/followers', follower.id]">{{ follower.login }}</a></h5>
+        <h5 class="card-title"><a [routerLink]="['/followers', follower.id, follower.login]">{{ follower.login }}</a></h5>
         <p class="card-text"><a routerLink="follower.html_url">{{ follower.html_url }}</a></p>
       </div>
     </div>
