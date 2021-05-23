@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GithubFollowersService } from '../services/github-followers.service';
+import { Follower } from '../types/Follower';
 
 @Component({
   selector: 'github-followers',
@@ -7,15 +8,16 @@ import { GithubFollowersService } from '../services/github-followers.service';
   styleUrls: ['./github-followers.component.css']
 })
 export class GithubFollowersComponent implements OnInit {
-  followers: any[] = [];
+  followers: Follower[] = [];
 
   constructor(private githubService: GithubFollowersService) { }
 
-    getFollowers(): void {
+  getFollowers(): void {
     this.githubService
     .getAll()
-    .subscribe( (followers: any )=> this.followers = followers)
+    .subscribe( (followers: Follower[])=> this.followers = followers)
   }
+
   ngOnInit(): void {
     this.getFollowers();
   }

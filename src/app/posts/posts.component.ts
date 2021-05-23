@@ -64,7 +64,7 @@ export class PostsComponent implements OnInit {
   getPosts(): void {
     this.postService
     .getAll()
-    .subscribe( (posts: Post[] )=> this.posts = posts)
+    .subscribe( (posts: Post[])=> this.posts = posts)
   }
 
   ngOnInit(): void {

@@ -1,7 +1,7 @@
 import { Data } from "@angular/router";
 export interface Post extends Data {
-  userId: number,
+  userId?: number,
   id : number,
-  title: string,
-  body: string
+  title?: string,
+  body?: string
 }
