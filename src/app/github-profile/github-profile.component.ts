@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'github-profile',
@@ -7,13 +7,17 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./github-profile.component.css']
 })
 export class GithubProfileComponent implements OnInit {
+  id!: string | null;
+  constructor(private route:ActivatedRoute, private router:Router) { }
 
-  constructor(private route:ActivatedRoute) { }
+  submit() {
+    this.router.navigate(['/followers'], {queryParams: {page:1, order:'newest'}})
+  }
 
   ngOnInit(): void {
     // User navigate away and come back
-    let id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
+    this.id = this.route.snapshot.paramMap.get('id');
+    console.log(this.id);
 
     // //stay in the page - subscribe to an observable
     // this.route.paramMap
