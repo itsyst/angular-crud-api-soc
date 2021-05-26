@@ -15,6 +15,9 @@ import { HomeComponent } from './home/home.component';
 import { GithubProfileComponent } from './github-profile/github-profile.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { CarComponent } from './car/car.component';
+import { CarProfileComponent } from './car-profile/car-profile.component';
+import { CarService } from './services/car.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     HomeComponent,
     GithubProfileComponent,
     NotFoundComponent,
-    NavbarComponent
+    NavbarComponent,
+    CarComponent,
+    CarProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +53,14 @@ import { NavbarComponent } from './navbar/navbar.component';
         component: PostsComponent
       },
       {
+        path: 'cars/:car',
+        component: CarProfileComponent
+      },
+      {
+        path: 'cars',
+        component: CarComponent
+      },
+      {
         path: '**',
         component: NotFoundComponent
       }
@@ -56,6 +69,7 @@ import { NavbarComponent } from './navbar/navbar.component';
   providers: [
     PostService,
     GithubFollowersService,
+    CarService,
     { provide: ErrorHandler, useClass: AppErrorHandler }
   ],
   bootstrap: [AppComponent]
