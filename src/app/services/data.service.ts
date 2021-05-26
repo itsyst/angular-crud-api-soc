@@ -31,7 +31,7 @@ export class DataService {
   }
 
   update(resource: Data): Observable<Data> {
-    return this.http.patch<Data>(this.url + '/' + resource.id, JSON.stringify({ isRed: true }))
+    return this.http.patch<Data>(this.url + '/' + resource.id, JSON.stringify({ updated: true }))
       .pipe(
         map((response:Data) => response),
         tap(_ => console.log(`updated data id=${resource.id}`)),
