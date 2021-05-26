@@ -1,4 +1,7 @@
+import { Car } from "./Car";
+
 export interface Data {
+  id?: number,
   login?: string,
   node_id?: string,
   avatar_url?: string,
@@ -17,7 +20,7 @@ export interface Data {
   type?: Object,
   site_admin?: boolean,
   userId?: number,
-  id: number,
   title?: string,
   body?: string
+  cars?:Car[]
 }

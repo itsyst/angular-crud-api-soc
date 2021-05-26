@@ -1,7 +1,7 @@
 import { Data } from "@angular/router";
 export interface Follower extends Data {
     login?: string,
-    id: number,
+    id?: number,
     node_id?: string,
     avatar_url?: string,
     gravatar_id?: string,
