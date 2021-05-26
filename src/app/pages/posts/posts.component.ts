@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NotFoundError } from 'rxjs';
 import { AppError } from '@/app/common/app-error';
 import { BadInput } from '@/app/common/bad-input';
-import { PostService } from '@/app/services/post.service';
+import { PostService } from '@/app/services/post/post.service';
 import { Post } from '@/app/types/Post';
 
 @Component({
