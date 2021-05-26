@@ -1,0 +1,31 @@
+<h2>Car Archive</h2>
+<!-- <ul>
+  <li *ngFor="let car of cars">
+    <a [routerLink]="['/car', car.car_model_year]">{{car.car}}</a>
+  </li>
+</ul> -->
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Car</th>
+      <th scope="col">Car Model</th>
+      <th scope="col">Car Color</th>
+      <th scope="col">Model Year</th>
+      <!-- <th scope="col">VIN</th>
+      <th scope="col">Price</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let car of cars">
+      <th scope="row">{{car.id}}</th>
+      <td><a [routerLink]="['/cars', car.car]">{{car.car}}</a></td>
+      <td>{{car.car_model}}</td>
+      <td>{{car.car_color}}</td>
+      <td>{{car.car_model_year}}</td>
+      <!-- <td>{{car.car_vin}}</td>
+      <td>{{car.price}}</td> -->
+    </tr>
+  </tbody>
+</table>
