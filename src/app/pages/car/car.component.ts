@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CarService } from '../../services/car/car.service';
-import { Car } from '../../types/Car';
+import { CarService } from '@/app/services/car/car.service';
+import { Car } from '@/app/types/car';
 
 @Component({
   selector: 'car',

@@ -14,16 +14,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { GithubProfileComponent } from './pages/github-profile/github-profile.component';
 import { NotFoundComponent } from './error/not-found/not-found.component';
-import { NavbarComponent } from './layout/navbar/navbar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { CarComponent } from './pages/car/car.component';
 import { CarProfileComponent } from './pages/car-profile/car-profile.component';
 import { CarService } from './services/car/car.service';
-import { LoginComponent } from './auth/login/login.component';
-import { SignupComponent } from './auth/signup/signup.component';
 import { NoAccessComponent } from './error/no-access/no-access.component';
-import { AdminComponent } from './auth/admin/admin.component';
-import { AuthService } from './services/auth/auth.service';
-import { OrderService } from './services/order/order.service';
 
 const routes: Routes = [
       {
@@ -51,14 +46,6 @@ const routes: Routes = [
         component: CarComponent
       },
       {
-        path: 'admin',
-        component: AdminComponent
-      },
-      {
-        path: 'login',
-        component: LoginComponent
-      },
-      {
         path: 'no-access',
         component: NoAccessComponent
       },
@@ -79,10 +66,7 @@ const routes: Routes = [
     NavbarComponent,
     CarComponent,
     CarProfileComponent,
-    LoginComponent,
-    SignupComponent,
     NoAccessComponent,
-    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -94,8 +78,6 @@ const routes: Routes = [
     PostService,
     GithubFollowersService,
     CarService,
-    AuthService,
-    OrderService,
     { provide: ErrorHandler, useClass: AppErrorHandler },
   ],
   bootstrap: [AppComponent]

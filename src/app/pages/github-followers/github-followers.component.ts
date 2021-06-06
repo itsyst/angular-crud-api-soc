@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { GithubFollowersService } from '../../services/github/github-followers.service';
-import { Follower } from '../../types/Follower';
+import { Follower } from '../../types/follower';
 
 @Component({
   selector: 'github-followers',
