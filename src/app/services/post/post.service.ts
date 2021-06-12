@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DataService } from '../data/data.service';
-import { environment } from '@/environments/environment.dev';
+import { environment } from '@/environments/environment';
 
 
 @Injectable({
