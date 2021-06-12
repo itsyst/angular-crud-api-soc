@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  navBarBackgroundColor: '#e3f2fd',
   title: 'Dev Environment Heading',
   apiURL: 'http://jsonplaceholder.typicode.com/posts/',
   apiGitHub: 'https://api.github.com/users/itsyst/followers',

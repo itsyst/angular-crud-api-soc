@@ -33,7 +33,7 @@
             "scripts": []
           },
           "configurations": {
-            "prod": {
+            "production": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -59,34 +59,6 @@
                   "maximumError": "4kb"
                 }
               ]
-            },
-            "dev": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.dev.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
             }
           }
         },
@@ -98,9 +70,6 @@
           "configurations": {
             "production": {
               "browserTarget": "angular-crud:build:production"
-            },
-            "dev": {
-              "browserTarget": "angular-crud:build:dev"
             }
           }
         },
@@ -149,9 +118,6 @@
           "configurations": {
             "production": {
               "devServerTarget": "angular-crud:serve:production"
-            },
-            "dev": {
-              "devServerTarget": "angular-crud:serve:dev"
             }
           }
         }
