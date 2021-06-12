@@ -1,4 +1,4 @@
-import { Car } from "./car";
+import { Car } from "@/app/types/car";
 
 export interface Data {
   id?: number,

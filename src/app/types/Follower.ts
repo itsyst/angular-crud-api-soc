@@ -1,4 +1,5 @@
-import { Data } from "@angular/router";
+import { Data } from "@/app/types/data";
+
 export interface Follower extends Data {
     login?: string,
     id?: number,
