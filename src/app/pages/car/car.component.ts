@@ -3,7 +3,7 @@ import { CarService } from '@/app/services/car/car.service';
 import { Car } from '@/app/types/car';
 
 @Component({
-  selector: 'car',
+  selector: 'app-car',
   templateUrl: './car.component.html',
   styleUrls: ['./car.component.css']
 })

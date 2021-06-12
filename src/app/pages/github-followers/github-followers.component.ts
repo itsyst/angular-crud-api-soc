@@ -6,7 +6,7 @@ import { GithubFollowersService } from '../../services/github/github-followers.s
 import { Follower } from '../../types/follower';
 
 @Component({
-  selector: 'github-followers',
+  selector: 'app-github-followers',
   templateUrl: './github-followers.component.html',
   styleUrls: ['./github-followers.component.css']
 })
