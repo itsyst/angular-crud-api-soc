@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { NotFoundError, Observable } from 'rxjs';
+import { NotFoundError, Observable, ObservableInput } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { AppError } from '@/app/common/app-error';
 import { BadInput } from '@/app/common/bad-input';
@@ -19,7 +19,7 @@ export class DataService {
       .pipe(
         map((response:Data[]) => response),
         tap(_ => console.log('fetched data')),
-        catchError(() => this.handelError));
+        catchError<any, any>(() => this.handelError));
   }
 
   create(resource: Data): Observable<Data> {
@@ -27,7 +27,7 @@ export class DataService {
       .pipe(
         map((response:Data) => response),
         tap((newData: Data) => console.log(`added data id=${newData.id}`)),
-        catchError(() => this.handelError));
+        catchError<any,any>(() => this.handelError));
   }
 
   update(resource: Data): Observable<Data> {
@@ -35,7 +35,7 @@ export class DataService {
       .pipe(
         map((response:Data) => response),
         tap(_ => console.log(`updated data id=${resource.id}`)),
-        catchError(() => this.handelError));
+        catchError<any,any>(() => this.handelError));
   }
 
   delete(resource: Data): Observable<Data>{
@@ -43,7 +43,7 @@ export class DataService {
       .pipe(
         map((response:Data) => response),
         tap(_ => console.log(`deleted data id=${resource.id}`)),
-        catchError(() => this.handelError));
+        catchError<any, any>(() => this.handelError));
   }
 
   private handelError(error: HttpErrorResponse) {
